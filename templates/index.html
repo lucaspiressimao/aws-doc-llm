@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Dynamic Documentation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Generate AWS Documentation</h1>
+    <form id="query-form">
+        <label for="query">Enter your query:</label>
+        <input type="text" id="query" name="query" required>
+        <button type="submit">Generate Documentation</button>
+    </form>
+    <div id="response">
+        <!-- A resposta do Ollama será exibida aqui -->
+    </div>
+
+    <script>
+        // Envia o formulário via AJAX para o Flask
+        $(document).ready(function() {
+            $('#query-form').on('submit', function(event) {
+                event.preventDefault();
+                const query = $('#query').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/generate',
+                    data: JSON.stringify({ query: query }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        $('#response').html('<p>' + response.result + '</p>');
+                    },
+                    error: function(error) {
+                        $('#response').html('<p>Error: ' + error.responseText + '</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
