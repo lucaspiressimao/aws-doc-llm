@@ -11,6 +11,23 @@
     <form id="query-form">
         <label for="query">Enter your query:</label>
         <input type="text" id="query" name="query" required>
+
+        <label for="region">Select AWS Region:</label>
+        <select id="region" name="region" required>
+            <option value="ALL">ALL</option>
+            <option value="us-east-1">US East (N. Virginia)</option>
+            <option value="us-west-1">US West (N. California)</option>
+            <option value="us-west-2">US West (Oregon)</option>
+            <option value="eu-west-1">EU (Ireland)</option>
+            <option value="eu-central-1">EU (Frankfurt)</option>
+            <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+            <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+            <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+            <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+            <option value="ap-south-1">Asia Pacific (Mumbai)</option>
+            <option value="sa-east-1">South America (São Paulo)</option>
+        </select>
+
         <button type="submit">Generate Documentation</button>
     </form>
     <div id="response">
@@ -23,11 +40,12 @@
             $('#query-form').on('submit', function(event) {
                 event.preventDefault();
                 const query = $('#query').val();
+                const region = $('#region').val();
 
                 $.ajax({
                     type: 'POST',
                     url: '/generate',
-                    data: JSON.stringify({ query: query }),
+                    data: JSON.stringify({ query: query, region: region }),
                     contentType: 'application/json',
                     success: function(response) {
                         $('#response').html('<p>' + response.result + '</p>');

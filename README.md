@@ -58,8 +58,8 @@ aws-doc-llm/
 ### Prerequisites
 
 - **Python 3.8+**
-- **AWS CLI** (optional, for configuring credentials locally)
-- **AWS Access Keys** for the accounts you intend to document
+- **AWS CLI**: Required for setting up and managing AWS credentials locally. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) and configure it by running `aws configure`.
+- **AWS Access Keys**: Required for the AWS accounts you intend to document.
 - **Ollama 3.2**: Required for the LLM functionality. **Ollama** must be installed on your system to execute this project.
 
 ### Ollama Installation
@@ -97,7 +97,13 @@ To install Ollama, follow these steps:
 
 3. **Set up AWS credentials**:
 
-   Configure AWS credentials using the AWS CLI or manually in the `aws_config.py` file.
+   Configure AWS credentials using the AWS CLI with the command:
+
+   ```bash
+   aws configure
+   ```
+
+   Alternatively, you can manually configure the credentials in the `aws_config.py` file.
 
 4. **Run the application**:
 
